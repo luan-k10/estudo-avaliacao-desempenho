@@ -1,0 +1,927 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Estudo ADSC · Avaliação e Desempenho de Sistemas Computacionais</title>
+  <meta name="description" content="Resumos, fórmulas, quiz, simulado, flashcards, questões discursivas e calculadoras para estudar Avaliação e Desempenho de Sistemas Computacionais.">
+  <meta name="author" content="Luan Kairo de Souza das Neves">
+  <meta name="theme-color" content="#6e1423">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%236e1423'/%3E%3Cpath fill='%23fff' d='M14.41 10 L17.52 10 L17.52 50.89 L42.49 50.89 L27 34.11 L29.29 32 L49.59 54 L14.41 54 Z M42.57 10 L46.88 10 L20.58 37.32 L20.58 32.84 Z'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/style.css">
+  <script>
+    (() => {
+      let t = null;
+      try { t = localStorage.getItem('theme'); } catch (e) {}
+      document.documentElement.dataset.theme = t || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    })();
+  </script>
+</head>
+<body>
+<header class="header">
+  <nav class="container topbar" aria-label="Principal">
+    <a class="brand" href="#" data-go="inicio">
+      <svg class="mark" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+        <rect width="64" height="64" rx="12"/>
+        <path d="M14.41 10 L17.52 10 L17.52 50.89 L42.49 50.89 L27 34.11 L29.29 32 L49.59 54 L14.41 54 Z M42.57 10 L46.88 10 L20.58 37.32 L20.58 32.84 Z"/>
+      </svg>
+      <span>Estudo ADSC</span>
+    </a>
+    <ul class="menu" id="nav">
+      <li><button data-view="inicio" class="active">Início</button></li>
+      <li><button data-view="resumos">Resumos</button></li>
+      <li><button data-view="formulas">Fórmulas</button></li>
+      <li><button data-view="quiz">Quiz</button></li>
+      <li><button data-view="simulado">Simulado</button></li>
+      <li><button data-view="flash">Flashcards</button></li>
+      <li><button data-view="disc">Discursivas</button></li>
+      <li><button data-view="calc">Calculadoras</button></li>
+    </ul>
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Alternar modo escuro" title="Alternar tema">
+      <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+  </nav>
+</header>
+
+<main class="container">
+
+<!-- ======================= INÍCIO ======================= -->
+<section class="view active" id="view-inicio">
+  <div class="hero">
+    <p class="eyebrow">Material de estudo · Profa. Edna Ramos</p>
+    <h1>Avaliação e Desempenho de <em>Sistemas Computacionais</em></h1>
+    <p class="lead">Tudo das 6 semanas em um só lugar: resumos diretos, fórmulas, questões com explicação, simulado cronometrado, flashcards, respostas-modelo das atividades e calculadoras para treinar as contas.</p>
+    <ul class="tags">
+      <li class="tag">Métricas</li><li class="tag">Diagnóstico</li><li class="tag">Hardware</li>
+      <li class="tag">Redes multimídia</li><li class="tag">Matriz de decisão</li><li class="tag">Teoria de filas</li>
+    </ul>
+    <div class="actions">
+      <button class="btn btn-primary" data-go="resumos">📖 Começar pelos resumos</button>
+      <button class="btn" data-go="quiz">🎯 Ir para o quiz</button>
+      <button class="btn" data-go="simulado">⏱ Fazer simulado</button>
+    </div>
+  </div>
+
+  <h2 class="section-title">Seu progresso</h2>
+  <div class="stats">
+    <div class="card stat"><b id="st-total">0</b><span>respondidas</span></div>
+    <div class="card stat"><b id="st-acerto">0%</b><span>de acerto</span></div>
+    <div class="card stat"><b id="st-erradas">0</b><span>para revisar</span></div>
+  </div>
+  <div class="card">
+    <div id="progresso-temas"></div>
+    <p class="small muted" style="margin-top:.8rem">O progresso fica salvo só neste navegador. <button class="btn btn-sm" id="btn-reset" type="button">Zerar progresso</button></p>
+  </div>
+
+  <h2 class="section-title" style="margin-top:2rem">Como estudar (roteiro rápido)</h2>
+  <div class="card">
+    <ol>
+      <li><b>Leia o resumo</b> de cada semana (≈10 min cada). Preste atenção nos quadros <b>⚠️ Pegadinha</b>.</li>
+      <li><b>Decore a folha de fórmulas</b> e faça as contas nas <b>calculadoras</b>.</li>
+      <li>Faça o <b>quiz por semana</b> logo depois de ler o resumo dela.</li>
+      <li>Escreva as <b>discursivas</b> (Atividade de Revisão e Atividade Semana 6) antes de olhar a resposta-modelo.</li>
+      <li>Termine com um <b>simulado</b> e use “Revisar erradas” no quiz.</li>
+    </ol>
+  </div>
+
+  <div class="grid" style="margin-top:1rem">
+    <button class="card feature" data-go="resumos"><span class="ico">📖</span><b>Resumos</b><span>6 semanas com tabelas, exemplos e pegadinhas.</span></button>
+    <button class="card feature" data-go="formulas"><span class="ico">🧮</span><b>Fórmulas</b><span>U, X, R, Little, M/M/1, AMAT, tempo de CPU…</span></button>
+    <button class="card feature" data-go="quiz"><span class="ico">🎯</span><b>Quiz</b><span>Questões objetivas com explicação na hora.</span></button>
+    <button class="card feature" data-go="simulado"><span class="ico">⏱</span><b>Simulado</b><span>Prova cronometrada com nota e correção.</span></button>
+    <button class="card feature" data-go="flash"><span class="ico">🃏</span><b>Flashcards</b><span>Revisão rápida de conceitos.</span></button>
+    <button class="card feature" data-go="disc"><span class="ico">✍️</span><b>Discursivas</b><span>Atividades e perguntas de revisão com resposta-modelo.</span></button>
+    <button class="card feature" data-go="calc"><span class="ico">🔢</span><b>Calculadoras</b><span>Filas, disponibilidade, matriz ponderada, rede…</span></button>
+  </div>
+</section>
+
+<!-- ======================= RESUMOS ======================= -->
+<section class="view" id="view-resumos">
+  <h2 class="section-title">Resumos por semana</h2>
+  <p class="lead">Toque em uma semana para abrir. Tabelas largas podem ser roladas para o lado.</p>
+  <nav class="week-index" aria-label="Semanas">
+    <a href="#sem1" data-week="sem1">Semana 1<small>Fundamentos</small></a>
+    <a href="#sem2" data-week="sem2">Semana 2<small>Diagnóstico: SO, aplicação e BD</small></a>
+    <a href="#sem3" data-week="sem3">Semana 3<small>Hardware e arquitetura</small></a>
+    <a href="#sem4" data-week="sem4">Semana 4<small>Redes multimídia</small></a>
+    <a href="#sem5" data-week="sem5">Semana 5<small>Decisão tecnológica</small></a>
+    <a href="#sem6" data-week="sem6">Semana 6<small>Modelagem e simulação</small></a>
+  </nav>
+
+  <!-- ---------- SEMANA 1 ---------- -->
+  <details class="card week" id="sem1">
+    <summary><span class="num">1</span><span class="ttl"><b>Fundamentos da Avaliação de Desempenho</b><small>Técnicas, tríade, métricas, U = B/T, X = C/T, benchmark e planejamento</small></span></summary>
+    <div class="week-body">
+      <div class="callout"><span class="ct">💡 Ideia central</span>Um sistema que <b>funciona</b> nem sempre é <b>eficiente</b>: pode executar corretamente e ainda assim ser lento, gastar muitos recursos ou não suportar muitos usuários. A avaliação de desempenho <b>mede, analisa e compara</b> o comportamento de hardware e software.</div>
+
+      <h3>O que a avaliação responde</h3>
+      <ul>
+        <li>O sistema atende ao número esperado de usuários?</li>
+        <li>O servidor tem capacidade suficiente?</li>
+        <li>O banco de dados responde rápido?</li>
+        <li>Vale a pena trocar de tecnologia?</li>
+      </ul>
+
+      <h3>As técnicas de avaliação</h3>
+      <div class="table-wrap"><table class="stack">
+        <thead><tr><th>Técnica</th><th>O que é</th><th>Exemplo / quando usar</th></tr></thead>
+        <tbody>
+          <tr><td>Modelagem analítica</td><td>Representação <b>matemática e abstrata</b> do sistema.</td><td>Teoria de Filas; estimativas rápidas.</td></tr>
+          <tr><td>Simulação</td><td>Programa de computador que <b>reproduz o comportamento</b> do sistema.</td><td>Testar cenários caros ou difíceis de reproduzir no real.</td></tr>
+          <tr><td>Medição / Aferição</td><td><b>Coleta direta de dados</b> em sistema existente ou protótipo.</td><td>Monitorar CPU, tempo de resposta, vazão.</td></tr>
+          <tr><td>Híbridos + validação cruzada</td><td><b>Combinação</b> de técnicas; uma confere a outra.</td><td>Medir → alimentar um modelo → comparar com o real.</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>A tríade essencial</h3>
+      <ul>
+        <li><b>Métrica</b>: critério numérico para avaliar (ex.: tempo de resposta, req/s).</li>
+        <li><b>Parâmetro</b>: fator que varia e afeta as métricas (ex.: nº de núcleos, RAM, tipo de disco).</li>
+        <li><b>Carga de trabalho (workload)</b>: conjunto de requisições submetidas ao sistema.</li>
+      </ul>
+      <div class="table-wrap"><table class="stack">
+        <thead><tr><th>Componente</th><th>Objetivo</th><th>Métrica</th><th>Carga de trabalho</th></tr></thead>
+        <tbody>
+          <tr><td>CPU</td><td>Aumentar requisições atendidas</td><td>Requisições/s</td><td>Programas típicos do SO</td></tr>
+          <tr><td>Banco de dados</td><td>Consultas rápidas</td><td>Tempo de resposta</td><td>Transações em pico</td></tr>
+          <tr><td>Redes</td><td>Escolher o link ideal</td><td>Banda / pacotes</td><td>Fluxos corporativos</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Principais métricas</h3>
+      <ul>
+        <li><b>Tempo de resposta (R)</b>: intervalo entre a solicitação e a resposta.</li>
+        <li><b>Throughput / vazão (X)</b>: operações concluídas por unidade de tempo.</li>
+        <li><b>Utilização (U)</b>: % do tempo em que o recurso está ocupado.</li>
+        <li><b>Disponibilidade</b>: % do tempo em que o sistema está operacional.</li>
+        <li><b>Escalabilidade</b>: capacidade de crescer mantendo o desempenho.</li>
+      </ul>
+
+      <h3>Formalização matemática</h3>
+      <span class="formula"><b>U = B / T</b> → B = tempo ocupado; T = tempo total observado</span>
+      <p>Exemplo da apostila: servidor ativo 18 h em 24 h → U = 18/24 = <b>75%</b>.</p>
+      <span class="formula"><b>X = C / T</b> → C = requisições concluídas; T = tempo total</span>
+      <p>Exemplo: 36.000 requisições em 1 h (3.600 s) → X = <b>10 req/s</b>.</p>
+
+      <h3>Benchmark</h3>
+      <p><b>Teste padronizado</b> para comparar sistemas em <b>condições semelhantes</b>. Sem condições equivalentes, a comparação não vale.</p>
+
+      <h3>Planejamento de um experimento (7 passos)</h3>
+      <ol>
+        <li>Definir o objetivo da avaliação.</li>
+        <li>Escolher as métricas.</li>
+        <li>Selecionar o ambiente de teste.</li>
+        <li>Executar os experimentos.</li>
+        <li>Registrar os resultados.</li>
+        <li>Interpretar os dados.</li>
+        <li>Elaborar conclusões.</li>
+      </ol>
+
+      <div class="callout warn"><span class="ct">⚠️ Pegadinhas</span>
+        <ul>
+          <li>Tempo de resposta ≠ vazão: um é <b>por requisição</b> (visão do usuário), o outro é <b>por unidade de tempo</b> (capacidade).</li>
+          <li>Parâmetro é o que você <b>varia</b>; métrica é o que você <b>mede</b>.</li>
+          <li>Modelagem = matemática; simulação = programa; medição = sistema real.</li>
+        </ul>
+      </div>
+      <div class="week-foot"><button class="btn btn-primary practice" data-tema="s1">🎯 Praticar Semana 1</button><button class="btn" data-go="formulas">🧮 Ver fórmulas</button></div>
+    </div>
+  </details>
+
+  <!-- ---------- SEMANA 2 ---------- -->
+  <details class="card week" id="sem2">
+    <summary><span class="num">2</span><span class="ttl"><b>Diagnóstico em SO, Aplicações e Banco de Dados</b><small>Sintoma → Evidência → Hipótese → Verificação · I/O Wait · gargalo antes de 100% · índices</small></span></summary>
+    <div class="week-body">
+      <div class="callout"><span class="ct">💡 Conceito fundamental</span>Um recurso pode virar <b>gargalo muito antes de chegar a 100%</b> de utilização. Contenção por concorrência, latência física, tempo de fila e <b>bloqueios (locks)</b> degradam o tempo de resposta mesmo com utilização moderada. Diagnosticar é investigar o sistema <b>como um todo</b>.</div>
+
+      <h3>Da medição para o diagnóstico</h3>
+      <p>Coletar métricas e gerar gráficos é só o primeiro passo. <b>Diagnosticar</b> é achar a origem da degradação (o <b>gargalo primário</b>) e a cadeia de causa e efeito entre hardware, SO, aplicação e banco. A causa raramente é “falta de hardware” genérica; geralmente é <b>fila, parâmetro desajustado, E/S desnecessária ou bloqueio</b>.</p>
+
+      <h3>As 4 etapas do diagnóstico</h3>
+      <div class="table-wrap"><table class="stack">
+        <thead><tr><th>Etapa</th><th>Pergunta orientadora</th><th>Exemplo</th></tr></thead>
+        <tbody>
+          <tr><td>1. Sintoma</td><td>O que o usuário está sentindo? (nunca revela a causa)</td><td>O app trava ao fechar o carrinho em alta demanda.</td></tr>
+          <tr><td>2. Evidência</td><td>Que dado mensurável e verificável foi registrado?</td><td>API = 28 s; CPU = 32%; I/O Wait = 62%; consultas BD = 4,2 s.</td></tr>
+          <tr><td>3. Hipótese</td><td>Qual encadeamento técnico explica os dados? (não é certeza)</td><td>As requisições estão retidas esperando consultas lentas no BD.</td></tr>
+          <tr><td>4. Verificação</td><td>Como comprovar ou refutar?</td><td>Testes isolados no BD e na aplicação; planos de execução; tempos de espera.</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Avaliando o Sistema Operacional</h3>
+      <h4>CPU</h4>
+      <ul>
+        <li><b>Utilização (%)</b>: tempo em que os núcleos processam instruções.</li>
+        <li><b>Fila de processos</b>: threads prontas esperando um núcleo. Fila persistente = demanda de cálculo maior que a capacidade.</li>
+        <li><b>I/O Wait</b>: tempo em que a CPU ficou <b>ociosa</b> enquanto havia pelo menos uma E/S pendente.</li>
+      </ul>
+      <div class="callout warn"><span class="ct">⚠️ Alerta sobre I/O Wait (cai muito!)</span>I/O Wait de 60% <b>não</b> significa disco 60% ocupado e <b>não prova</b> que o disco é a causa. É só uma <b>subclasse do tempo ocioso</b> da CPU. Com pouca tarefa de CPU e uma única thread lendo disco, o I/O Wait pode ficar alto com o disco folgado. Para saber se o armazenamento está saturado, olhe métricas <b>do disco</b>: <b>tempo de atendimento por operação</b> e <b>profundidade da fila</b>.</div>
+      <h4>Memória RAM</h4>
+      <ul>
+        <li><b>Alocada × livre</b>: quanto os processos usam frente ao total.</li>
+        <li><b>Cache e buffers</b>: o SO usa RAM livre para guardar blocos lidos do disco e evitar leituras físicas repetidas.</li>
+        <li><b>Paginação / swap</b>: “emergência” quando falta RAM; o SO joga blocos para o disco (muito mais lento) → <b>degradação extrema</b> se for contínua.</li>
+      </ul>
+      <h4>Armazenamento</h4>
+      <ul>
+        <li><b>Utilização do dispositivo</b>: tempo ocupado atendendo ao menos uma requisição.</li>
+        <li><b>Tempo de atendimento / latência por operação</b>: da emissão da E/S até a conclusão.</li>
+        <li><b>Fila de E/S</b>: requisições acumuladas esperando o disco.</li>
+      </ul>
+      <div class="callout info"><span class="ct">📌 Mito dos 100%</span>Discos podem degradar com <b>60–70%</b> de ocupação (busca aleatória + filas internas). Numa CPU de 4 núcleos, <b>um núcleo saturado</b> por uma thread crítica dá média de só <b>25%</b> — e mesmo assim é gargalo. Gargalo = o componente que <b>restringe o fluxo global</b>.</div>
+
+      <h3>Avaliando Aplicações (4 pilares)</h3>
+      <span class="formula"><b>R = tempo em fila (espera) + tempo de execução (serviço)</b></span>
+      <ul>
+        <li><b>Tempo de resposta</b>: é preciso <b>decompor</b> onde o tempo foi gasto (fila de entrada, código, rede, chamadas ao BD/serviços externos). Não culpe uma camada sem evidência.</li>
+        <li><b>Vazão</b>: cresce <b>linearmente</b> com a carga enquanto há folga; no <b>ponto de saturação</b> atinge o teto — mais carga só aumenta a fila e o tempo de resposta “explode”.</li>
+        <li><b>Filas e concorrência</b>: limites de threads/conexões/processos; o excedente fica em fila. Fila que <b>não esvazia</b> após o pico → esgotamento e instabilidade.</li>
+        <li><b>Taxa de erros</b>: requisições que falham ou estouram o <b>timeout</b>; sob estresse, lentidão vira cascata de erros.</li>
+      </ul>
+
+      <h3>Avaliando Bancos de Dados (SGBD)</h3>
+      <ul>
+        <li><b>Full Table Scan</b> (varredura completa) <b>não</b> indica necessariamente falta de índice. O otimizador escolhe de propósito quando a <b>tabela é pequena</b> ou quando a consulta retorna <b>grande fração das linhas</b> (leitura sequencial é mais rápida que muitos acessos aleatórios). Só é problema em tabela grande buscando poucas linhas sem índice.</li>
+        <li><b>Busca indexada</b> <b>não garante</b> rapidez: índice de <b>baixa seletividade</b> (ex.: sexo, ativo/inativo), índice <b>fragmentado</b> ou muitas leituras aleatórias depois do índice.</li>
+        <li><b>Transações e persistência</b>: precisam gravar em meio persistente (durabilidade); carga com muita <b>escrita</b> exige diferente de carga de leitura.</li>
+        <li><b>Concorrência e locks</b>: transações longas seguram bloqueios; as outras entram em fila lógica → lentidão geral <b>mesmo com CPU e memória baixas</b>.</li>
+        <li><b>Impacto no usuário</b>: conexões presas esperando consultas → filas no servidor web → tela congela / timeout.</li>
+      </ul>
+
+      <h3>Quando o sintoma não é a causa</h3>
+      <div class="table-wrap"><table class="stack">
+        <thead><tr><th>Sintoma</th><th>Diagnóstico precipitado</th><th>Investigação com evidências</th></tr></thead>
+        <tbody>
+          <tr><td>Resposta web sobe de 1 s para 25 s</td><td>“Precisa de mais CPU” ou “a linguagem é ruim”.</td><td>Decompondo R: 24 s esperando o BD e só 1 s de processamento local.</td></tr>
+          <tr><td>CPU a 30%, mas o sistema trava</td><td>“Tem folga; a culpa é da internet do cliente”.</td><td>CPU ociosa esperando E/S, ou uma thread saturando um núcleo isolado.</td></tr>
+          <tr><td>BD lento usando só 40% da RAM</td><td>“Sobra memória; o problema é o processador”.</td><td>O SGBD foi configurado para usar pouca memória e faz leituras em disco.</td></tr>
+        </tbody>
+      </table></div>
+      <p class="small muted">Estudo de caso da semana: <b>FictíciaPay</b> (pagamento demora; API 28 s, CPU 32%, I/O Wait 62%, consultas 4,2 s) — exercício de formular hipóteses concorrentes com base em evidências.</p>
+
+      <div class="callout warn"><span class="ct">⚠️ Pegadinhas</span>
+        <ul>
+          <li>“Só é gargalo se estiver a 100%” → <b>FALSO</b>.</li>
+          <li>“I/O Wait alto = disco com defeito/saturado” → <b>precipitado</b>.</li>
+          <li>“Full scan = falta de índice” e “tem índice = consulta rápida” → <b>ambos falsos</b>.</li>
+          <li>Sintoma é o que o usuário <b>sente</b>; evidência é o dado <b>medido</b>.</li>
+        </ul>
+      </div>
+      <div class="week-foot"><button class="btn btn-primary practice" data-tema="s2">🎯 Praticar Semana 2</button><button class="btn" data-go="disc">✍️ Discursivas</button></div>
+    </div>
+  </details>
+
+  <!-- ---------- SEMANA 3 ---------- -->
+  <details class="card week" id="sem3">
+    <summary><span class="num">3</span><span class="ttl"><b>Desempenho da Arquitetura (Hardware)</b><small>GHz × IPC, núcleos, hierarquia de memória, AMAT, HDD × SSD × NVMe, benchmark</small></span></summary>
+    <div class="week-body">
+      <div class="callout"><span class="ct">💡 Ideia principal</span>O desempenho <b>não depende de uma peça só</b>. A CPU precisa receber dados da memória; os dados estão na RAM ou no armazenamento; cada tarefa exige os componentes de forma diferente. O melhor computador é o que atende bem <b>à carga de trabalho</b> de quem vai usá-lo.</div>
+
+      <h3>Componentes</h3>
+      <ul>
+        <li><b>CPU</b>: executa as instruções.</li>
+        <li><b>Cache</b>: guarda dados/instruções usados com frequência, perto da CPU.</li>
+        <li><b>RAM</b>: programas e dados em uso no momento.</li>
+        <li><b>Armazenamento (HDD/SSD)</b>: guarda dados mesmo desligado (persistente).</li>
+      </ul>
+      <p><b>Gargalo</b> = recurso que limita o desempenho de uma tarefa. Comprar a peça com o “maior número da propaganda” não garante um PC mais rápido.</p>
+
+      <h3>Tipos de carga de trabalho</h3>
+      <div class="table-wrap"><table class="stack">
+        <thead><tr><th>Tipo</th><th>O que mais exige</th><th>Exemplo</th></tr></thead>
+        <tbody>
+          <tr><td>CPU-bound</td><td>Capacidade de processamento</td><td>Cálculos matemáticos, simulações</td></tr>
+          <tr><td>Memory-bound</td><td>Movimentação de dados memória ↔ CPU</td><td>Manipular grandes matrizes</td></tr>
+          <tr><td>I/O-bound</td><td>Leitura e gravação em dispositivos</td><td>Abrir muitos arquivos, consultar dados</td></tr>
+        </tbody>
+      </table></div>
+      <p class="small muted">Uma aplicação real mistura os três; a classificação diz qual recurso tende a limitar mais.</p>
+
+      <h3>Processador: além dos GHz</h3>
+      <ul>
+        <li><b>Clock (GHz)</b>: ciclos por segundo. Não diz quanto trabalho é feito por ciclo.</li>
+        <li><b>IPC</b>: média de instruções concluídas por ciclo naquela carga (varia com CPU e programa).</li>
+      </ul>
+      <span class="formula"><b>Tempo de CPU = Nº de instruções ÷ (IPC × frequência)</b></span>
+      <span class="formula"><b>Instruções por segundo = IPC × frequência</b></span>
+      <div class="table-wrap"><table>
+        <thead><tr><th>12 bilhões de instruções</th><th class="n">Processador A</th><th class="n">Processador B</th></tr></thead>
+        <tbody>
+          <tr><td>Frequência</td><td class="n">4,8 GHz</td><td class="n">4,0 GHz</td></tr>
+          <tr><td>IPC médio</td><td class="n">1,25</td><td class="n">1,80</td></tr>
+          <tr class="hl"><td>Tempo estimado</td><td class="n">12 ÷ (1,25 × 4,8) = 2,00 s</td><td class="n">12 ÷ (1,80 × 4,0) ≈ 1,67 s</td></tr>
+        </tbody>
+      </table></div>
+      <p>B tem <b>menos GHz e termina primeiro</b> porque faz mais trabalho por ciclo. Revisão Q1: A = 4,5 × 1,1 = <b>4,95 bi instr/s</b>; B = 3,6 × 1,6 = <b>5,76 bi instr/s</b> → B processa mais.</p>
+      <p>A fórmula <b>não é o tempo de resposta total</b>: a aplicação também espera memória, disco, rede e o SO.</p>
+      <p><b>Núcleos / multi-thread</b>: ajudam quando a tarefa pode ser dividida em partes simultâneas; tarefa sequencial aproveita pouco os núcleos extras.</p>
+
+      <h3>Hierarquia de memória</h3>
+      <div class="table-wrap"><table class="stack">
+        <thead><tr><th>Nível</th><th>Para que serve</th><th>Velocidade relativa</th></tr></thead>
+        <tbody>
+          <tr><td>Registradores</td><td>Valores usados diretamente pela CPU</td><td>Muito alta</td></tr>
+          <tr><td>Cache L1, L2, L3</td><td>Dados/instruções reutilizáveis</td><td>Alta (varia por nível)</td></tr>
+          <tr><td>RAM</td><td>Programas e dados em uso</td><td>Mais lenta que a cache</td></tr>
+          <tr><td>SSD</td><td>Armazenamento persistente</td><td>Muito mais lento que RAM</td></tr>
+          <tr><td>HDD</td><td>Discos magnéticos com partes móveis</td><td>Mais lento em acessos aleatórios</td></tr>
+        </tbody>
+      </table></div>
+      <p>Quanto mais perto da CPU → mais rápido e menor.</p>
+      <ul>
+        <li><b>Localidade temporal</b>: dado usado há pouco tende a ser usado de novo (variável dentro de um laço).</li>
+        <li><b>Localidade espacial</b>: endereços vizinhos tendem a ser acessados em seguida (percorrer um vetor em ordem).</li>
+        <li><b>Cache hit</b>: o dado está na cache. <b>Cache miss</b>: precisa buscar em outro nível (RAM) → CPU espera.</li>
+      </ul>
+      <span class="formula"><b>AMAT = tempo de acesso à cache + (taxa de falha × penalidade da falha)</b></span>
+      <p class="small muted">Exemplo ilustrativo: 1 ns + 0,05 × 100 ns = 6 ns. Mais falhas ou falhas mais caras → AMAT maior.</p>
+      <ul>
+        <li><b>Mais RAM</b> só ajuda se a memória <b>não era suficiente</b>; se já há folga, pode não acelerar.</li>
+        <li><b>Cache maior</b> pode reduzir falhas, mas não acelera todo programa.</li>
+        <li><b>Dual Channel</b> aumenta a largura de banda de memória; beneficia tarefas que movem muitos dados, mas <b>não dobra</b> a velocidade do PC.</li>
+      </ul>
+
+      <h3>Armazenamento: HDD, SSD SATA, SSD NVMe</h3>
+      <span class="formula"><b>Tempo de serviço do HDD = busca (seek) + latência rotacional + transferência</b></span>
+      <p><b>Seek</b> (mover o cabeçote) e <b>latência rotacional</b> (esperar o setor passar) são <b>mecânicas</b> → por isso o HDD sofre em <b>acessos aleatórios</b>.</p>
+      <div class="table-wrap"><table class="stack">
+        <thead><tr><th>Característica</th><th>HDD</th><th>SSD SATA</th><th>SSD NVMe</th></tr></thead>
+        <tbody>
+          <tr><td>Tecnologia</td><td>Discos magnéticos, partes móveis</td><td>Memória flash</td><td>Memória flash</td></tr>
+          <tr><td>Conexão</td><td>SATA</td><td>SATA III</td><td>PCIe</td></tr>
+          <tr><td>Desempenho</td><td>Lento em acesso aleatório</td><td>Bem mais rápido que HDD</td><td>Maior vazão e paralelismo</td></tr>
+          <tr><td>Ponto forte</td><td>Muita capacidade por custo</td><td>Ótimo upgrade em PC antigo</td><td>Altas taxas e baixa latência</td></tr>
+        </tbody>
+      </table></div>
+      <ul>
+        <li><b>Sequencial</b>: dados em sequência (copiar arquivo grande). <b>Aleatório</b>: locais diferentes (consultas a BD). A diferença HDD × SSD é maior no <b>aleatório</b>.</li>
+        <li><b>NVMe</b> aproveita várias solicitações simultâneas; se o programa faz <b>uma por vez</b>, não usa todo o paralelismo.</li>
+      </ul>
+
+      <h3>Benchmark: como interpretar</h3>
+      <p>Teste padronizado/repetível; os equipamentos precisam rodar <b>carga equivalente</b> em condições conhecidas. Teste de CPU <b>não</b> prevê banco de dados; leitura sequencial <b>não</b> prevê milhares de acessos aleatórios. <b>SPEC</b> = organização que cria suítes de teste com regras definidas. Ferramentas antigas (ex.: <b>PC Wizard 2010</b>) são só exemplos didáticos.</p>
+      <p><b>Pergunte sempre:</b> qual tarefa foi testada? Qual métrica? Em que condições? Representa o meu uso real?</p>
+
+      <h3>Estudo de caso: Alfa × Beta (mesmo preço)</h3>
+      <div class="table-wrap wide"><table>
+        <thead><tr><th>Componente</th><th>Alfa</th><th>Beta</th></tr></thead>
+        <tbody>
+          <tr><td>CPU</td><td>4 núcleos / 8 threads; 4,8 GHz</td><td>8 núcleos / 16 threads; 4,0 GHz</td></tr>
+          <tr><td>Cache L3</td><td>8 MB</td><td>32 MB</td></tr>
+          <tr><td>RAM</td><td>32 GB, Single Channel</td><td>16 GB, Dual Channel</td></tr>
+          <tr><td>Armazenamento</td><td>HDD 2 TB</td><td>SSD NVMe 512 GB</td></tr>
+          <tr class="hl"><td>Mono-thread</td><td>3.200 pts</td><td>3.050 pts</td></tr>
+          <tr class="hl"><td>Simulação multi-thread</td><td>180 s</td><td>105 s</td></tr>
+          <tr class="hl"><td>Consultas aleatórias</td><td>38,2 s · 125 IOPS</td><td>1,9 s · 18.500 IOPS</td></tr>
+        </tbody>
+      </table></div>
+      <p class="table-hint">↔ deslize a tabela para o lado</p>
+      <ul>
+        <li>Alfa vence por pouco no mono-thread → não significa ser melhor em tudo.</li>
+        <li>Beta vence na simulação paralela (mais núcleos) e <b>muito</b> nas consultas aleatórias (NVMe sem partes mecânicas).</li>
+        <li>Mas: simulação que precisa de <b>20 GB</b> não cabe nos 16 GB da Beta (vai para memória virtual); base de <b>800 GB</b> não cabe no SSD de 512 GB.</li>
+        <li><b>Conclusão: não existe vencedora universal</b> — depende da carga e da capacidade exigida por cada setor.</li>
+      </ul>
+
+      <div class="callout warn"><span class="ct">⚠️ Pegadinhas</span>
+        <ul>
+          <li>“Mais GHz = mais rápido” → <b>falso</b>; depende do IPC.</li>
+          <li>“Mais RAM sempre acelera” → <b>falso</b>.</li>
+          <li>Medição mostra o resultado; a <b>explicação</b> da causa precisa de testes adicionais.</li>
+        </ul>
+      </div>
+      <div class="week-foot"><button class="btn btn-primary practice" data-tema="s3">🎯 Praticar Semana 3</button><button class="btn" data-go="calc" data-lab="cpu">🔢 Calculadora de CPU/AMAT</button></div>
+    </div>
+  </details>
+
+  <!-- ---------- SEMANA 4 ---------- -->
+  <details class="card week" id="sem4">
+    <summary><span class="num">4</span><span class="ttl"><b>Desempenho de Redes Multimídia</b><small>Banda × throughput, latência, RTT, jitter, perda, TCP/UDP/QUIC, filas, QoS, iPerf</small></span></summary>
+    <div class="week-body">
+      <div class="callout"><span class="ct">💡 Princípio fundamental</span>Banda larga sobrando <b>não garante qualidade</b> para aplicações interativas. Voz e vídeo em tempo real dependem de <b>baixa latência, jitter controlado e pouca perda</b>. Um link de <b>1 Gbps</b> pode colapsar com variação de atraso, buffers cheios ou descarte de pacotes.</div>
+
+      <h3>Multimídia × tráfego tradicional</h3>
+      <ul>
+        <li>Downloads <b>toleram atraso</b> desde que os dados cheguem corretos.</li>
+        <li>Vídeo/voz ao vivo precisam dos dados <b>na hora certa</b>: pacote muito atrasado perde a utilidade; aplicativos toleram <b>pequenas</b> perdas, mas perdas altas estragam áudio e vídeo.</li>
+      </ul>
+
+      <h3>Tríade aplicada a redes</h3>
+      <ul>
+        <li><b>Métricas</b>: throughput, latência, jitter, perda de pacotes.</li>
+        <li><b>Parâmetros</b>: capacidade do link, tipo de conexão, equipamentos, configuração.</li>
+        <li><b>Carga</b>: dados que circulam (quantidade, frequência, tipo de tráfego).</li>
+      </ul>
+      <div class="table-wrap"><table class="stack">
+        <thead><tr><th>Perfil de carga</th><th>Padrão de emissão</th><th>Sensibilidade a atraso</th><th>Exemplos</th></tr></thead>
+        <tbody>
+          <tr><td>CBR (taxa constante)</td><td>Fluxo regular, pacotes espaçados igualmente</td><td>Altíssima (atraso e jitter)</td><td>Áudio sem compressão dinâmica, telemetria, VoIP básico</td></tr>
+          <tr><td>VBR (taxa variável)</td><td>Volume varia com o conteúdo</td><td>Alta; exige sincronismo</td><td>Vídeo comprimido ao vivo (cena de ação × estática)</td></tr>
+          <tr><td>Rajadas (bursty)</td><td>Picos intensos e períodos ociosos</td><td>Baixa; exige alta vazão média</td><td>Downloads, backups, atualizações de SO</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Banda nominal × throughput efetivo</h3>
+      <p><b>Largura de banda nominal</b> = capacidade anunciada do link. <b>Throughput</b> = dados <b>úteis</b> que realmente chegam por período. Fica menor por causa de: <b>cabeçalhos/controle dos protocolos</b>, <b>compartilhamento do canal</b> (especialmente Wi-Fi) e <b>interferências</b> (distância, obstáculos, ruído).</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Padrão</th><th class="n">Nominal</th><th class="n">Real (iPerf)</th><th class="n">Eficiência</th></tr></thead>
+        <tbody>
+          <tr><td>802.11b</td><td class="n">11 Mbps</td><td class="n">4,60 Mbps</td><td class="n">41,8%</td></tr>
+          <tr><td>802.11g</td><td class="n">54 Mbps</td><td class="n">17,59 Mbps</td><td class="n">32,6%</td></tr>
+          <tr><td>802.11n</td><td class="n">300 Mbps</td><td class="n">94,00 Mbps</td><td class="n">31,3%</td></tr>
+        </tbody>
+      </table></div>
+      <p>Por isso <b>aumentar o link da operadora</b> não resolve problemas na rede interna, no Wi-Fi ou nos equipamentos intermediários (caso da <b>Universidade XYZ</b>).</p>
+
+      <h3>Latência, RTT e jitter</h3>
+      <span class="formula"><b>Latência total = propagação + transmissão + processamento + espera em fila</b></span>
+      <ul>
+        <li><b>Propagação</b>: o sinal percorrer a distância.</li>
+        <li><b>Transmissão</b>: colocar os bits no canal (depende do tamanho do pacote e da capacidade do enlace).</li>
+        <li><b>Processamento</b>: roteadores/switches analisarem e encaminharem.</li>
+        <li><b>Fila</b>: espera antes de transmitir; cresce com o tráfego.</li>
+      </ul>
+      <p><b>RTT</b> (round-trip time) = ida + volta; medido com o <code>ping</code>. <b>Jitter</b> = <b>variação do atraso</b> entre pacotes → áudio/vídeo irregulares.</p>
+      <p><b>Buffer de jitter (de-jitter)</b>: guarda os pacotes por um instante para reproduzi-los em intervalos regulares. <b>Buffer vazio</b> (pacote demorou) → corte/travamento. <b>Buffer cheio ou pacote tardio</b> → descarte.</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Métrica</th><th class="n">Excelente</th><th class="n">Aceitável</th></tr></thead>
+        <tbody>
+          <tr><td>Latência unidirecional</td><td class="n">&lt; 150 ms</td><td class="n">150–300 ms</td></tr>
+          <tr><td>RTT</td><td class="n">&lt; 100 ms</td><td class="n">100–250 ms</td></tr>
+          <tr><td>Jitter médio</td><td class="n">&lt; 20 ms</td><td class="n">20–30 ms</td></tr>
+          <tr><td>Perda de pacotes</td><td class="n">&lt; 1%</td><td class="n">1–3%</td></tr>
+        </tbody>
+      </table></div>
+      <p class="small muted">Acima do “aceitável” = degradação severa. Valores são <b>referências aproximadas</b>; dependem do aplicativo, equipamentos e condições.</p>
+
+      <h3>Protocolos de transporte</h3>
+      <div class="table-wrap"><table class="stack">
+        <thead><tr><th>Protocolo</th><th>Como entrega</th><th>Uso típico</th></tr></thead>
+        <tbody>
+          <tr><td>UDP</td><td>Datagramas <b>sem garantia</b> de entrega nem retransmissão</td><td>Áudio/vídeo ao vivo: pacote atrasado é pior que pacote perdido</td></tr>
+          <tr><td>TCP</td><td><b>Confiável</b>, retransmite o que se perdeu</td><td>Downloads e vídeo sob demanda (buffers compensam atrasos)</td></tr>
+          <tr><td>QUIC</td><td>Moderno, <b>construído sobre UDP</b>; combina transporte e segurança</td><td>Aplicações e serviços web atuais</td></tr>
+        </tbody>
+      </table></div>
+      <p><b>Perda de pacotes</b> tem duas causas principais: <b>problemas físicos</b> (interferência, sinal fraco, falha no meio) e <b>fila cheia</b> em equipamento intermediário (descarte).</p>
+
+      <h3>Filas, congestionamento e QoS</h3>
+      <ul>
+        <li><b>Congestionamento</b>: dados enviados se aproximam/ultrapassam a capacidade.</li>
+        <li><b>Estouro de buffer</b> (queue overflow): fila cheia → novos pacotes descartados.</li>
+        <li><b>Perda/descarte</b>: pacote não chega (falha de transmissão ou descarte).</li>
+        <li><b>Bufferbloat</b>: filas <b>muito grandes</b> acumulam pacotes e aumentam muito o <b>atraso</b>, <b>mesmo sem descarte</b>.</li>
+        <li><b>DropTail/FIFO</b>: atende por ordem de chegada; fila cheia → descarta os novos.</li>
+        <li><b>SFQ</b> (enfileiramento justo): distribui o atendimento entre fluxos; evita que uma transferência ocupe toda a fila.</li>
+        <li><b>QoS</b>: classifica e <b>prioriza</b> tráfego (voz/vídeo antes de transferências que podem esperar).</li>
+      </ul>
+      <div class="callout info"><span class="ct">📌 Limite do QoS</span>Priorizar <b>não aumenta a capacidade física</b> do link nem elimina o atraso da distância. Se a demanda total passar da capacidade, ainda haverá atraso e perda.</div>
+
+      <h3>Aferição com iPerf / JPerf</h3>
+      <p>Modelo <b>cliente-servidor</b>. Em modo <b>UDP</b> informa: <b>throughput efetivo</b>, <b>jitter médio</b> e <b>% de perda</b>. JPerf = interface gráfica.</p>
+      <p><b>Limitações</b>: (1) carga <b>sintética</b> e regular — não reproduz o comportamento adaptativo de Zoom/Teams/Meet (codecs, compressão dinâmica); (2) para na <b>camada de transporte</b> — não mede decodificação, renderização ou buffer do app; (3) é uma <b>fotografia</b> daquele momento e caminho — não vale como verdade permanente.</p>
+
+      <div class="callout warn"><span class="ct">⚠️ Pegadinhas</span>
+        <ul>
+          <li>Jitter é a <b>variação</b> do atraso — é a resposta para “variação na entrega dos pacotes”.</li>
+          <li>Videoconferência usa <b>UDP</b> porque retransmitir chegaria tarde demais.</li>
+          <li>Bufferbloat = atraso alto <b>sem</b> perda; estouro de buffer = <b>com</b> descarte.</li>
+          <li>QoS <b>não cria</b> banda.</li>
+        </ul>
+      </div>
+      <div class="week-foot"><button class="btn btn-primary practice" data-tema="s4">🎯 Praticar Semana 4</button><button class="btn" data-go="calc" data-lab="rede">🔢 Classificador de rede</button></div>
+    </div>
+  </details>
+
+  <!-- ---------- SEMANA 5 ---------- -->
+  <details class="card week" id="sem5">
+    <summary><span class="num">5</span><span class="ttl"><b>Requisitos, Planejamento e Comparação de Tecnologias</b><small>Ceteris paribus, 5 critérios, SLA, TCO (CapEx/OpEx), matriz ponderada, Fictícia Varejo</small></span></summary>
+    <div class="week-body">
+      <div class="callout"><span class="ct">💡 Ideia central</span>A melhor tecnologia <b>não é necessariamente a mais rápida nem a mais barata</b>. É a que atende aos requisitos importantes do negócio com o melhor equilíbrio entre <b>desempenho, disponibilidade, crescimento, custo e manutenção</b>.</div>
+
+      <h3>Como planejar uma comparação justa</h3>
+      <ul>
+        <li><b>Comece pelos requisitos</b>, com valores verificáveis: ≥ 250 req/s no pico; resposta média &lt; 1 s; disponibilidade ≥ 99,8%; custo ≤ R$ 250.000 em 3 anos. Separe <b>obrigatório</b> de vantagem: quem não atende a um requisito essencial é <b>descartado</b>, mesmo se for barato.</li>
+        <li><b>Ceteris paribus</b> (“mantidas as demais condições constantes”): mesma carga de trabalho, mesmos dados, mesmas operações, mesmas regras e condições de rede. Senão, a diferença pode vir do teste e não da tecnologia.</li>
+        <li><b>Benchmarks</b> dão referência comum, mas não garantem o mesmo resultado na sua empresa → complementar com carga representativa e <b>PoC</b> (prova de conceito).</li>
+      </ul>
+
+      <h3>Os 5 critérios</h3>
+      <h4>1. Desempenho</h4>
+      <p>Não use uma medida só: <b>tempo de resposta</b>, <b>vazão</b> e <b>IOPS</b> (operações de E/S por segundo). Observe o comportamento <b>sob a carga esperada</b>.</p>
+      <h4>2. Disponibilidade</h4>
+      <p>Proporção do tempo em que o serviço funciona e está acessível. Aparece em <b>SLA</b> (acordo de nível de serviço).</p>
+      <span class="formula"><b>Indisponibilidade/ano = (1 − disponibilidade) × 8.760 h</b></span>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Disponibilidade</th><th class="n">Parado por ano (aprox.)</th></tr></thead>
+        <tbody>
+          <tr><td>98,5%</td><td class="n">131 horas</td></tr>
+          <tr><td>99,8%</td><td class="n">17,5 horas</td></tr>
+          <tr><td>99,9%</td><td class="n">8,8 horas</td></tr>
+          <tr><td>99,99%</td><td class="n">52,6 minutos</td></tr>
+        </tbody>
+      </table></div>
+      <p>Favorecida por <b>redundância</b> (recursos de reserva), cópias de dados, recuperação, estruturas distribuídas. <b>MTBF</b> = tempo médio <b>entre falhas</b> (frequência); <b>MTTR</b> = tempo médio <b>para reparo</b> (recuperação). SLA é <b>compromisso contratual</b>, não garantia de que falhas sejam impossíveis.</p>
+      <h4>3. Escalabilidade</h4>
+      <ul>
+        <li><b>Vertical (scale-up)</b>: mais recursos <b>na mesma máquina</b> (mais RAM, CPU melhor). Tem limite físico e pode ficar caro.</li>
+        <li><b>Horizontal (scale-out)</b>: <b>mais máquinas/instâncias</b> trabalhando juntas (nuvem, sistemas distribuídos).</li>
+      </ul>
+      <p>Adicionar servidores <b>não resolve</b> gargalo concentrado num recurso compartilhado, como o banco de dados.</p>
+      <h4>4. Custo total de propriedade (TCO)</h4>
+      <ul>
+        <li><b>CapEx</b> (capital): investimento inicial — servidores, equipamentos, licenças permanentes, estrutura.</li>
+        <li><b>OpEx</b> (operacional): gastos recorrentes — energia, refrigeração, links, suporte, equipe, mensalidade de nuvem.</li>
+      </ul>
+      <p>Preço inicial baixo pode sair caro ao longo do tempo. Compare num <b>período comum</b> (ex.: 3 anos).</p>
+      <h4>5. Manutenibilidade</h4>
+      <p>Facilidade de manter, corrigir, atualizar e recuperar + esforço da equipe. Infra que exige troca de peças e rotinas manuais consome uma <b>equipe pequena</b>; serviço gerenciado transfere parte disso ao fornecedor (mas ainda exige gestão).</p>
+
+      <h3>Matriz de decisão ponderada</h3>
+      <span class="formula"><b>Pontuação = D×0,30 + Disp×0,20 + Esc×0,20 + Custo×0,20 + Manut×0,10</b></span>
+      <p>Notas de <b>1 a 5</b> (1 muito inadequado · 2 limitado · 3 adequado · 4 bom · 5 excelente), sempre <b>justificadas</b>. Em custo, nota maior = condição financeira <b>mais favorável</b>; em manutenção, nota maior = <b>menos esforço</b>.</p>
+      <div class="table-wrap wide"><table>
+        <thead><tr><th>Alternativa</th><th class="n">Desemp. 30%</th><th class="n">Disp. 20%</th><th class="n">Escal. 20%</th><th class="n">Custo 20%</th><th class="n">Manut. 10%</th><th class="n">Total</th></tr></thead>
+        <tbody>
+          <tr><td>X — Econômica</td><td class="n">2 → 0,60</td><td class="n">2 → 0,40</td><td class="n">1 → 0,20</td><td class="n">5 → 1,00</td><td class="n">2 → 0,20</td><td class="n"><b>2,40</b></td></tr>
+          <tr><td>Y — Equilibrada</td><td class="n">4 → 1,20</td><td class="n">4 → 0,80</td><td class="n">3 → 0,60</td><td class="n">3 → 0,60</td><td class="n">4 → 0,40</td><td class="n"><b>3,60</b></td></tr>
+          <tr class="hl"><td>Z — Premium</td><td class="n">5 → 1,50</td><td class="n">5 → 1,00</td><td class="n">5 → 1,00</td><td class="n">2 → 0,40</td><td class="n">4 → 0,40</td><td class="n"><b>4,30</b></td></tr>
+        </tbody>
+      </table></div>
+      <p class="table-hint">↔ deslize a tabela para o lado</p>
+      <p>Z vence mesmo com custo ruim porque se destaca nos critérios de maior peso. <b>Os pesos podem mudar</b> conforme as prioridades (orçamento apertado → mais peso em custo; e-commerce/financeiro → disponibilidade e desempenho). <b>Análise de sensibilidade</b>: ver se o ranking muda ao alterar os pesos; se pequenas mudanças invertem tudo, a decisão merece atenção. A matriz <b>apoia</b>, não substitui o julgamento técnico — e os requisitos obrigatórios são checados <b>antes</b>.</p>
+
+      <h3>Variabilidade e confiança</h3>
+      <ul>
+        <li><b>Uma única execução não basta</b>: usuários, tarefas e estado do sistema mudam o resultado.</li>
+        <li><b>A média esconde problemas</b>: dois servidores com média de 200 ms — um entre 190–210 ms, outro com picos de 1.200 ms. Mesma média, experiência muito pior no segundo → olhe a <b>variação</b>.</li>
+        <li>Repita os testes e calcule média, variabilidade e <b>intervalo de confiança</b> (90% ou 95%), que expressa a incerteza da estimativa.</li>
+        <li>Sobreposição visual de intervalos <b>não prova</b> equivalência; ausência de sobreposição não substitui análise estatística (<b>teste t</b>, <b>ANOVA</b>).</li>
+      </ul>
+
+      <h3>Estudo de caso: Fictícia Varejo</h3>
+      <p>E-commerce com lentidão e perda de vendas em promoções. Requisitos: <b>≥ 250 req/s</b> com <b>R &lt; 1 s</b> na Black Friday; <b>≥ 99,8%</b> de disponibilidade (cada hora parada ≈ <b>R$ 35.000</b>); <b>dobrar</b> a demanda em 18 meses; <b>≤ R$ 250.000</b> em 3 anos.</p>
+      <div class="table-wrap"><table class="stack">
+        <thead><tr><th>Critério</th><th>A — Tradicional</th><th>B — Moderna local</th><th>C — Nuvem gerenciada</th></tr></thead>
+        <tbody>
+          <tr><td>Vazão máxima</td><td>65 req/s</td><td>280 req/s</td><td>450 req/s</td></tr>
+          <tr><td>Resposta sob carga</td><td>4,2 s</td><td>0,40 s</td><td>0,35 s</td></tr>
+          <tr><td>Disponibilidade</td><td>98,5%</td><td>99,8%</td><td>99,99%</td></tr>
+          <tr><td>Escalabilidade</td><td>Baixa (30–45 dias)</td><td>Média (dias)</td><td>Alta (minutos)</td></tr>
+          <tr><td>Custo 3 anos</td><td>R$ 95.000</td><td>R$ 180.000</td><td>R$ 245.000</td></tr>
+          <tr><td>Manutenção</td><td>Alta (equipe cuida de tudo)</td><td>Média</td><td>Baixa (provedor gerencia parte)</td></tr>
+        </tbody>
+      </table></div>
+      <ol>
+        <li><b>Requisitos obrigatórios primeiro</b>: A é <b>descartada</b> (65 req/s e 4,2 s; 98,5% &lt; 99,8%). B atende (disponibilidade <b>no limite</b>). C atende.</li>
+        <li><b>Matriz</b>: B = 3·0,30 + 3·0,20 + 3·0,20 + 4·0,20 + 3·0,10 = <b>3,20</b>; C = 5·0,30 + 5·0,20 + 5·0,20 + 2·0,20 + 4·0,10 = <b>4,30</b> → recomenda-se <b>C</b>.</li>
+        <li><b>Por que pagar R$ 65.000 a mais (~36%)?</b> Menor risco de parada (R$ 35.000/h), flexibilidade para dobrar a demanda, menos esforço com infraestrutura física (equipe pequena).</li>
+        <li><b>Quando B seria melhor?</b> Orçamento mais limitado, infraestrutura local já existente, equipe especializada, restrições de conectividade/contratação de nuvem — desde que continue atendendo aos requisitos.</li>
+      </ol>
+
+      <div class="callout warn"><span class="ct">⚠️ Pegadinhas</span>
+        <ul>
+          <li>Checar requisitos obrigatórios <b>antes</b> da pontuação.</li>
+          <li>SLA de 99,99% <b>não elimina</b> falhas.</li>
+          <li>TCO = CapEx <b>+</b> OpEx, não só o preço de compra.</li>
+          <li>A conclusão vale para <b>as premissas</b> do cenário; numa contratação real, validar com testes, contrato e custos.</li>
+        </ul>
+      </div>
+      <div class="week-foot"><button class="btn btn-primary practice" data-tema="s5">🎯 Praticar Semana 5</button><button class="btn" data-go="calc" data-lab="matriz">🔢 Matriz ponderada</button></div>
+    </div>
+  </details>
+
+  <!-- ---------- SEMANA 6 ---------- -->
+  <details class="card week" id="sem6">
+    <summary><span class="num">6</span><span class="ttl"><b>Modelagem Analítica e Simulação</b><small>Medição × modelo × simulação, filas, M/M/1, U = X·S, Lei de Little, Fictícia Varejo 500 req/s</small></span></summary>
+    <div class="week-body">
+      <div class="callout"><span class="ct">💡 Pergunta da semana</span>Como estimar o que vai acontecer quando a demanda crescer, <b>antes</b> que o problema aconteça de verdade?</div>
+
+      <h3>Três formas de avaliar (não competem, se complementam)</h3>
+      <div class="table-wrap"><table class="stack">
+        <thead><tr><th>Técnica</th><th>Em palavras simples</th><th>Quando é útil</th><th>Limitação</th></tr></thead>
+        <tbody>
+          <tr><td>Medição</td><td>Observar e registrar um sistema real ou protótipo</td><td>Quando o sistema existe e dá para testar</td><td>Mostra só o cenário medido; não prevê cargas muito diferentes nem sistemas não construídos</td></tr>
+          <tr><td>Modelagem analítica</td><td>Relações matemáticas simplificadas</td><td>Estimativas rápidas; entender carga × capacidade × espera</td><td>Depende de hipóteses; o real pode ser mais complexo</td></tr>
+          <tr><td>Simulação</td><td>Modelo executável que reproduz o funcionamento</td><td>Experimentar cenários caros/difíceis no real</td><td>Precisa construir e conferir o modelo; dados ou premissas errados = resultado inútil</td></tr>
+        </tbody>
+      </table></div>
+      <p><b>Abordagem combinada</b>: (1) medir para obter dados reais (tempos de atendimento, volume); (2) usar os dados num modelo/simulação para estudar cenários não testados; (3) comparar com medições e ajustar hipóteses. Ex.: medir a loja com 250 req/s e modelar 400 ou 500 req/s — ajuda a planejar, <b>não substitui</b> um teste de capacidade.</p>
+
+      <h3>Filas e tempo de resposta</h3>
+      <p>Uma fila aparece quando as solicitações chegam <b>mais rápido</b> do que o recurso consegue atender naquele momento.</p>
+      <div class="table-wrap"><table class="stack">
+        <thead><tr><th>Conceito</th><th>Significado</th></tr></thead>
+        <tbody>
+          <tr><td>Chegada</td><td>Ritmo com que as requisições chegam</td></tr>
+          <tr><td>Serviço</td><td>Tempo em que o recurso trabalha numa requisição</td></tr>
+          <tr><td>Espera na fila</td><td>Tempo aguardando a vez</td></tr>
+          <tr><td>Tempo de resposta</td><td>Espera na fila + atendimento</td></tr>
+          <tr><td>Utilização</td><td>Parcela do tempo em que o recurso está ocupado</td></tr>
+          <tr><td>Vazão</td><td>Requisições concluídas por unidade de tempo</td></tr>
+        </tbody>
+      </table></div>
+      <p>Quando a chegada se aproxima da capacidade, sobra pouca folga para picos → a fila cresce e <b>R sobe rapidamente</b> (não-linear).</p>
+      <span class="formula"><b>M/M/1: R = S ÷ (1 − U)</b> → com S = 2 ms</span>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Utilização</th><th class="n">20%</th><th class="n">50%</th><th class="n">80%</th><th class="n">90%</th><th class="n">95%</th><th class="n">98%</th></tr></thead>
+        <tbody><tr><td>Tempo de resposta</td><td class="n">2,5 ms</td><td class="n">4 ms</td><td class="n">10 ms</td><td class="n">20 ms</td><td class="n">40 ms</td><td class="n">100 ms</td></tr></tbody>
+      </table></div>
+      <p class="table-hint">↔ deslize a tabela para o lado</p>
+      <p>De 80% para 95% a utilização sobe <b>15 pontos</b>, mas R vai de 10 para <b>40 ms</b> (4×). Operar perto do limite é arriscado. (Exemplo didático do M/M/1, não previsão universal.)</p>
+
+      <h3>Duas leis operacionais</h3>
+      <span class="formula"><b>Utilização = vazão × tempo de serviço</b> &nbsp;(U = X × S)</span>
+      <span class="formula"><b>Lei de Little: N = X × R</b> &nbsp;(nº médio no sistema = vazão × tempo médio de resposta)</span>
+      <p>Ex.: 20 req/s × 0,5 s = <b>10 requisições</b> no sistema, em média.</p>
+
+      <h3>Simulação computacional</h3>
+      <p>Representação simplificada executada para observar o comportamento — inclui só o que importa para a pergunta (chegada de pedidos, aplicação, BD, tempo de cada etapa).</p>
+      <div class="table-wrap"><table class="stack">
+        <thead><tr><th>Tipo</th><th>Como funciona</th><th>Exemplo</th></tr></thead>
+        <tbody>
+          <tr><td>Dirigida por tempo</td><td>Relógio avança em <b>intervalos fixos</b>, mesmo sem nada acontecer</td><td>Verificar o estado a cada 10 ms</td></tr>
+          <tr><td>Dirigida por eventos</td><td>Relógio <b>salta para o próximo evento</b> relevante (ignora períodos ociosos)</td><td>Próxima chegada ou fim de atendimento — muito usada em filas e redes</td></tr>
+        </tbody>
+      </table></div>
+      <p><b>Cuidados para confiar</b>:</p>
+      <ul>
+        <li><b>Repetir</b> as execuções (aleatoriedade gera resultados atípicos).</li>
+        <li><b>Sementes (seeds)</b>: repetem a mesma sequência aleatória para comparar alternativas em condições iguais; variar as sementes confirma se o resultado se mantém.</li>
+        <li><b>Warm-up</b>: descartar o período inicial (sistema vazio ≠ operação normal).</li>
+        <li><b>Conferir o modelo</b> com medições reais e estimativas analíticas.</li>
+      </ul>
+      <p>A simulação <b>não transforma hipótese em fato</b>: mostra o que acontece dentro das regras programadas.</p>
+
+      <h3>Caso integrador: Fictícia Varejo indo de 250 para 500 req/s</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Componente</th><th class="n">Demanda (S)</th><th class="n">U a 250 req/s</th><th class="n">U a 500 req/s</th></tr></thead>
+        <tbody>
+          <tr><td>Web / API</td><td class="n">1,2 ms</td><td class="n">30%</td><td class="n">60%</td></tr>
+          <tr><td>Aplicação</td><td class="n">1,6 ms</td><td class="n">40%</td><td class="n">80%</td></tr>
+          <tr class="hl"><td>Banco de dados</td><td class="n">1,8 ms</td><td class="n">45%</td><td class="n">90%</td></tr>
+          <tr><td>Armazenamento</td><td class="n">0,8 ms</td><td class="n">20%</td><td class="n">40%</td></tr>
+        </tbody>
+      </table></div>
+      <p>Conta: U = X × S → BD = 500 × 0,0018 s = <b>0,90 (90%)</b>. O <b>banco de dados</b> merece atenção: pouca folga para picos e, pelo M/M/1, a espera cresce muito acima de 80%. A projeção de R global &gt; <b>1,8 s</b> é um <b>alerta a investigar</b>, não medição confirmada. <b>Mais servidores web não resolvem</b> um gargalo no BD (recurso compartilhado).</p>
+
+      <h3>Atividade Semana 6: sistema de matrículas (resumo da análise)</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Indicador</th><th class="n">Normal</th><th class="n">Pico</th></tr></thead>
+        <tbody>
+          <tr><td>Requisições recebidas/s</td><td class="n">20</td><td class="n">80</td></tr>
+          <tr><td>Requisições atendidas/s</td><td class="n">20</td><td class="n">55</td></tr>
+          <tr><td>Tempo médio de resposta</td><td class="n">0,4 s</td><td class="n">2,8 s</td></tr>
+          <tr><td>CPU</td><td class="n">35%</td><td class="n">78%</td></tr>
+          <tr><td>RAM</td><td class="n">45%</td><td class="n">52%</td></tr>
+          <tr class="hl"><td>Armazenamento</td><td class="n">25%</td><td class="n">92%</td></tr>
+          <tr><td>Aguardando atendimento</td><td class="n">2</td><td class="n">120</td></tr>
+        </tbody>
+      </table></div>
+      <ul>
+        <li>Chegam 80 e saem 55 → <b>25 req/s se acumulam</b>: o sistema atingiu a saturação e a fila cresce.</li>
+        <li><b>Armazenamento</b> teve o maior salto (25% → 92%) e combina com as consultas lentas ao BD → principal suspeito.</li>
+        <li>CPU a 78% <b>sozinha não prova</b> que ela é o gargalo.</li>
+        <li>Little: N = 55 × 2,8 ≈ <b>154</b> requisições no sistema — coerente com a fila de 120 + as em atendimento.</li>
+        <li>Primeira preocupação: <b>investigar armazenamento + consultas ao BD</b> antes de comprar servidores.</li>
+      </ul>
+
+      <div class="callout ok"><span class="ct">✅ Síntese da disciplina</span><b>Medição</b> mostra o que está acontecendo; <b>modelagem analítica</b> estima limites com hipóteses simplificadas; <b>simulação</b> experimenta cenários antes de aplicá-los. Decisões de desempenho devem ser sustentadas por <b>evidências</b>, interpretadas considerando as hipóteses e limitações de cada técnica.</div>
+      <div class="week-foot"><button class="btn btn-primary practice" data-tema="s6">🎯 Praticar Semana 6</button><button class="btn" data-go="calc" data-lab="fila">🔢 Simular fila M/M/1</button></div>
+    </div>
+  </details>
+</section>
+
+<!-- ======================= FÓRMULAS ======================= -->
+<section class="view" id="view-formulas">
+  <h2 class="section-title">Folha de fórmulas</h2>
+  <p class="lead">Tudo que envolve conta na disciplina, com o exemplo da apostila.</p>
+  <div class="grid">
+    <div class="card f-card"><h3>Utilização</h3><span class="formula"><b>U = B / T</b></span><p>B = tempo ocupado; T = tempo total. 18 h / 24 h = <b>75%</b>.</p></div>
+    <div class="card f-card"><h3>Vazão (throughput)</h3><span class="formula"><b>X = C / T</b></span><p>C = requisições concluídas; T = tempo. 36.000 / 3.600 s = <b>10 req/s</b>.</p></div>
+    <div class="card f-card"><h3>Tempo de resposta</h3><span class="formula"><b>R = espera na fila + serviço</b></span><p>Decompor R mostra onde o tempo é gasto (fila, código, rede, BD).</p></div>
+    <div class="card f-card"><h3>Lei da utilização</h3><span class="formula"><b>U = X × S</b></span><p>BD: 500 req/s × 1,8 ms = <b>90%</b>. Web: 500 × 1,2 ms = 60%.</p></div>
+    <div class="card f-card"><h3>Lei de Little</h3><span class="formula"><b>N = X × R</b></span><p>20 req/s × 0,5 s = <b>10</b> no sistema. Matrículas: 55 × 2,8 ≈ 154.</p></div>
+    <div class="card f-card"><h3>Fila M/M/1</h3><span class="formula"><b>R = S / (1 − U)</b></span><p>S = 2 ms: 80% → 10 ms · 90% → 20 ms · 95% → 40 ms · 98% → 100 ms.</p></div>
+    <div class="card f-card"><h3>Tempo de CPU</h3><span class="formula"><b>T = instruções / (IPC × f)</b></span><p>12 bi / (1,25 × 4,8) = 2,00 s; 12 bi / (1,8 × 4,0) ≈ 1,67 s.</p></div>
+    <div class="card f-card"><h3>Instruções por segundo</h3><span class="formula"><b>IPS = IPC × f</b></span><p>1,1 × 4,5 GHz = 4,95 bi/s; 1,6 × 3,6 GHz = 5,76 bi/s.</p></div>
+    <div class="card f-card"><h3>AMAT</h3><span class="formula"><b>AMAT = t<sub>hit</sub> + taxa de falha × penalidade</b></span><p>1 ns + 0,05 × 100 ns = 6 ns (ilustrativo).</p></div>
+    <div class="card f-card"><h3>Acesso ao HDD</h3><span class="formula"><b>T = seek + latência rotacional + transferência</b></span><p>As duas primeiras são mecânicas → HDD lento no acesso aleatório.</p></div>
+    <div class="card f-card"><h3>Latência de rede</h3><span class="formula"><b>L = propagação + transmissão + processamento + fila</b></span><p>RTT = ida + volta (ping). Jitter = variação do atraso.</p></div>
+    <div class="card f-card"><h3>Eficiência do link</h3><span class="formula"><b>Ef = throughput real / banda nominal</b></span><p>802.11g: 17,59 / 54 = <b>32,6%</b>.</p></div>
+    <div class="card f-card"><h3>Indisponibilidade</h3><span class="formula"><b>Parado/ano = (1 − A) × 8.760 h</b></span><p>99,8% → 17,5 h · 99,9% → 8,8 h · 99,99% → 52,6 min · 98,5% → 131 h.</p></div>
+    <div class="card f-card"><h3>Matriz ponderada</h3><span class="formula"><b>Σ (nota × peso)</b></span><p>Pesos 30/20/20/20/10. X = 2,40 · Y = 3,60 · Z = 4,30 · B = 3,20 · C = 4,30.</p></div>
+    <div class="card f-card"><h3>TCO</h3><span class="formula"><b>TCO = CapEx + OpEx</b> (no período)</span><p>CapEx = investimento inicial; OpEx = gastos recorrentes.</p></div>
+    <div class="card f-card"><h3>Disponibilidade (MTBF/MTTR)</h3><span class="formula"><b>A = MTBF / (MTBF + MTTR)</b></span><p class="muted">Fórmula clássica complementar; a apostila cobra o conceito: MTBF = entre falhas, MTTR = para reparar.</p></div>
+  </div>
+</section>
+
+<!-- ======================= QUIZ ======================= -->
+<section class="view" id="view-quiz">
+  <h2 class="section-title">Quiz</h2>
+  <div id="quiz-setup">
+    <p class="lead">Escolha um conjunto. A resposta e a explicação aparecem assim que você marca. As alternativas são embaralhadas.</p>
+    <div class="options-grid" id="quiz-options"></div>
+  </div>
+  <div id="quiz-area" class="hidden"></div>
+</section>
+
+<!-- ======================= SIMULADO ======================= -->
+<section class="view" id="view-simulado">
+  <h2 class="section-title">Simulado</h2>
+  <div id="sim-setup" class="card">
+    <p>Questões sorteadas, sem mostrar a resposta na hora. No fim você recebe nota (0–10), desempenho por semana e a correção comentada.</p>
+    <div class="row">
+      <div class="field"><label for="sim-n">Quantidade de questões</label>
+        <select id="sim-n"><option value="10">10 questões</option><option value="20" selected>20 questões</option><option value="30">30 questões</option><option value="50">50 questões</option></select></div>
+      <div class="field"><label for="sim-tema">Conteúdo</label>
+        <select id="sim-tema"><option value="">Todas as semanas</option></select></div>
+    </div>
+    <button class="btn btn-primary" id="sim-start">▶ Iniciar simulado</button>
+  </div>
+  <div id="sim-area" class="hidden"></div>
+</section>
+
+<!-- ======================= FLASHCARDS ======================= -->
+<section class="view" id="view-flash">
+  <h2 class="section-title">Flashcards</h2>
+  <p class="lead">Tente lembrar a resposta e toque no cartão para conferir. No computador: <code>espaço</code> vira, <code>← →</code> navegam.</p>
+  <div class="flash-wrap">
+    <div class="card flashcard" id="flashcard" role="button" tabindex="0" aria-label="Virar cartão">
+      <span class="side-label" id="flash-side">Pergunta</span>
+      <div class="front" id="flash-front"></div>
+      <div class="back" id="flash-back"></div>
+      <span class="tap">toque para virar</span>
+    </div>
+    <div class="flash-ctrl">
+      <button class="btn" id="flash-prev">← Anterior</button>
+      <span id="flash-count">1 / 1</span>
+      <button class="btn btn-primary" id="flash-next">Próximo →</button>
+    </div>
+    <div class="flash-extra"><button class="btn btn-sm" id="flash-shuffle">🔀 Embaralhar</button></div>
+  </div>
+</section>
+
+<!-- ======================= DISCURSIVAS ======================= -->
+<section class="view" id="view-disc">
+  <h2 class="section-title">Discursivas</h2>
+  <p class="lead">Atividade de Revisão, Atividade Semana 6 e perguntas de revisão das apostilas. Escreva sua resposta (fica salva no navegador), depois compare com a resposta-modelo e marque os pontos-chave que você citou.</p>
+  <div class="chips" id="disc-filter"></div>
+  <details class="card" id="disc-case">
+    <summary><b>📋 Dados do estudo de caso — sistema de matrículas (Atividade Semana 6)</b></summary>
+    <div class="table-wrap" style="margin-top:.8rem"><table>
+      <thead><tr><th>Indicador</th><th class="n">Normal</th><th class="n">Pico</th></tr></thead>
+      <tbody>
+        <tr><td>Requisições recebidas/s</td><td class="n">20</td><td class="n">80</td></tr>
+        <tr><td>Requisições atendidas/s</td><td class="n">20</td><td class="n">55</td></tr>
+        <tr><td>Tempo médio de resposta</td><td class="n">0,4 s</td><td class="n">2,8 s</td></tr>
+        <tr><td>Utilização da CPU</td><td class="n">35%</td><td class="n">78%</td></tr>
+        <tr><td>Utilização da RAM</td><td class="n">45%</td><td class="n">52%</td></tr>
+        <tr><td>Utilização do armazenamento</td><td class="n">25%</td><td class="n">92%</td></tr>
+        <tr><td>Requisições aguardando</td><td class="n">2</td><td class="n">120</td></tr>
+      </tbody>
+    </table></div>
+    <p class="small muted">Durante o pico, algumas consultas ao banco de dados demoram mais que o habitual. Dados simulados para fins didáticos.</p>
+  </details>
+  <div id="disc-list"></div>
+</section>
+
+<!-- ======================= CALCULADORAS ======================= -->
+<section class="view" id="view-calc">
+  <h2 class="section-title">Calculadoras</h2>
+  <p class="lead">Mude os valores e veja o resultado na hora. Os valores iniciais são os exemplos das apostilas.</p>
+  <div class="chips" id="lab-tabs">
+    <button data-lab="basico" class="active">U e X</button>
+    <button data-lab="fila">Fila M/M/1</button>
+    <button data-lab="lei">U = X·S</button>
+    <button data-lab="little">Lei de Little</button>
+    <button data-lab="disp">Disponibilidade</button>
+    <button data-lab="matriz">Matriz ponderada</button>
+    <button data-lab="cpu">CPU e AMAT</button>
+    <button data-lab="rede">Rede</button>
+  </div>
+
+  <div class="lab card calc" id="lab-basico">
+    <h3>Utilização e vazão</h3>
+    <p class="desc">U = B / T (tempo ocupado ÷ tempo total) e X = C / T (concluídas ÷ tempo).</p>
+    <div class="row">
+      <div class="field"><label for="b-b">Tempo ocupado B (h)</label><input type="number" id="b-b" value="18" min="0" step="any"></div>
+      <div class="field"><label for="b-t">Tempo total T (h)</label><input type="number" id="b-t" value="24" min="0" step="any"></div>
+      <div class="field"><label for="b-c">Requisições concluídas C</label><input type="number" id="b-c" value="36000" min="0" step="any"></div>
+    </div>
+    <div class="result" id="b-res"></div>
+  </div>
+
+  <div class="lab card calc hidden" id="lab-fila">
+    <h3>Fila M/M/1: R = S / (1 − U)</h3>
+    <p class="desc">Arraste a utilização e veja o tempo de resposta “explodir” perto de 100%.</p>
+    <div class="row">
+      <div class="field"><label for="f-s">Tempo de serviço S (ms)</label><input type="number" id="f-s" value="2" min="0" step="any"></div>
+      <div class="field"><label for="f-u">Utilização U: <b id="f-uv">80%</b></label><input type="range" id="f-u" min="0" max="99" value="80"></div>
+    </div>
+    <div class="result" id="f-res"></div>
+    <div class="table-wrap"><table id="f-tab"></table></div>
+  </div>
+
+  <div class="lab card calc hidden" id="lab-lei">
+    <h3>Lei da utilização por componente (U = X × S)</h3>
+    <p class="desc">Fictícia Varejo: mude a vazão X e veja qual componente satura primeiro.</p>
+    <div class="field"><label for="l-x">Vazão X (req/s)</label><input type="number" id="l-x" value="500" min="0" step="any"></div>
+    <div class="table-wrap"><table id="l-tab"></table></div>
+    <div class="result" id="l-res"></div>
+  </div>
+
+  <div class="lab card calc hidden" id="lab-little">
+    <h3>Lei de Little: N = X × R</h3>
+    <p class="desc">Preencha dois valores e escolha o que calcular.</p>
+    <div class="row">
+      <div class="field"><label for="li-x">Vazão X (req/s)</label><input type="number" id="li-x" value="55" min="0" step="any"></div>
+      <div class="field"><label for="li-r">Tempo de resposta R (s)</label><input type="number" id="li-r" value="2.8" min="0" step="any"></div>
+      <div class="field"><label for="li-n">Nº no sistema N</label><input type="number" id="li-n" value="" min="0" step="any"></div>
+      <div class="field"><label for="li-q">Calcular</label><select id="li-q"><option value="n">N (nº no sistema)</option><option value="x">X (vazão)</option><option value="r">R (tempo de resposta)</option></select></div>
+    </div>
+    <div class="result" id="li-res"></div>
+  </div>
+
+  <div class="lab card calc hidden" id="lab-disp">
+    <h3>Disponibilidade → tempo parado</h3>
+    <p class="desc">Ano de 365 dias = 8.760 h.</p>
+    <div class="row">
+      <div class="field"><label for="d-a">Disponibilidade (%)</label><input type="number" id="d-a" value="99.8" min="0" max="100" step="any"></div>
+      <div class="field"><label for="d-c">Prejuízo por hora parada (R$)</label><input type="number" id="d-c" value="35000" min="0" step="any"></div>
+    </div>
+    <div class="result" id="d-res"></div>
+    <h4>A partir de MTBF e MTTR (complementar)</h4>
+    <div class="row">
+      <div class="field"><label for="d-mtbf">MTBF (h)</label><input type="number" id="d-mtbf" value="500" min="0" step="any"></div>
+      <div class="field"><label for="d-mttr">MTTR (h)</label><input type="number" id="d-mttr" value="1" min="0" step="any"></div>
+    </div>
+    <div class="result" id="d-res2"></div>
+  </div>
+
+  <div class="lab card calc hidden" id="lab-matriz">
+    <h3>Matriz de decisão ponderada</h3>
+    <p class="desc">Edite notas (1–5) e pesos (%) — ótimo para treinar a <b>análise de sensibilidade</b>.</p>
+    <div class="chips" id="m-preset">
+      <button data-p="xyz" class="active">Exemplo X/Y/Z</button>
+      <button data-p="varejo">Fictícia Varejo B/C</button>
+    </div>
+    <div class="table-wrap"><table class="matrix" id="m-tab"></table></div>
+    <div class="result" id="m-res"></div>
+  </div>
+
+  <div class="lab card calc hidden" id="lab-cpu">
+    <h3>Tempo de CPU: instruções ÷ (IPC × clock)</h3>
+    <div class="row">
+      <div class="field"><label for="c-i">Instruções (bilhões)</label><input type="number" id="c-i" value="12" min="0" step="any"></div>
+    </div>
+    <div class="grid-2">
+      <div><h4>Processador A</h4><div class="row">
+        <div class="field"><label for="c-fa">Clock (GHz)</label><input type="number" id="c-fa" value="4.8" min="0" step="any"></div>
+        <div class="field"><label for="c-ia">IPC</label><input type="number" id="c-ia" value="1.25" min="0" step="any"></div></div></div>
+      <div><h4>Processador B</h4><div class="row">
+        <div class="field"><label for="c-fb">Clock (GHz)</label><input type="number" id="c-fb" value="4.0" min="0" step="any"></div>
+        <div class="field"><label for="c-ib">IPC</label><input type="number" id="c-ib" value="1.8" min="0" step="any"></div></div></div>
+    </div>
+    <div class="result" id="c-res"></div>
+    <h3 style="margin-top:1.5rem">AMAT</h3>
+    <div class="row">
+      <div class="field"><label for="a-h">Acesso à cache (ns)</label><input type="number" id="a-h" value="1" min="0" step="any"></div>
+      <div class="field"><label for="a-m">Taxa de falha (%)</label><input type="number" id="a-m" value="5" min="0" max="100" step="any"></div>
+      <div class="field"><label for="a-p">Penalidade da falha (ns)</label><input type="number" id="a-p" value="100" min="0" step="any"></div>
+    </div>
+    <div class="result" id="a-res"></div>
+  </div>
+
+  <div class="lab card calc hidden" id="lab-rede">
+    <h3>Classificador de qualidade de rede</h3>
+    <p class="desc">Limiares de referência da Semana 4 (aproximados).</p>
+    <div class="row">
+      <div class="field"><label for="r-lat">Latência unidirecional (ms)</label><input type="number" id="r-lat" value="120" min="0" step="any"></div>
+      <div class="field"><label for="r-rtt">RTT (ms)</label><input type="number" id="r-rtt" value="180" min="0" step="any"></div>
+      <div class="field"><label for="r-jit">Jitter (ms)</label><input type="number" id="r-jit" value="35" min="0" step="any"></div>
+      <div class="field"><label for="r-loss">Perda (%)</label><input type="number" id="r-loss" value="0.5" min="0" step="any"></div>
+    </div>
+    <div class="result" id="r-res"></div>
+    <h4>Eficiência do link</h4>
+    <div class="row">
+      <div class="field"><label for="r-nom">Banda nominal (Mbps)</label><input type="number" id="r-nom" value="54" min="0" step="any"></div>
+      <div class="field"><label for="r-real">Throughput medido (Mbps)</label><input type="number" id="r-real" value="17.59" min="0" step="any"></div>
+    </div>
+    <div class="result" id="r-res2"></div>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <p class="muted">© <span id="ano">2026</span> Luan Kairo de Souza das Neves · Material de estudo baseado nas apostilas da Profa. Edna Ramos (ADSC).</p>
+    <p class="muted"><a href="https://luan-k10.github.io/">Portfólio</a> · <a href="https://github.com/luan-k10">GitHub</a> · <a href="https://www.linkedin.com/in/luankairo/">LinkedIn</a></p>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
