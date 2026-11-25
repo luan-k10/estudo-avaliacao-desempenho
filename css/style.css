@@ -414,3 +414,10 @@ input[type=range] { width: 100%; accent-color: var(--accent-fill); }
   .view { display: block !important; }
   details.week { break-inside: avoid; }
 }
+
+/* ---------- Link para a central de matérias ---------- */
+.menu a.menu-home {
+  display: block; padding: .4rem .7rem; border-radius: 8px; color: var(--muted); font-weight: 600;
+  white-space: nowrap; text-decoration: none; border: 1px solid var(--border);
+}
+.menu a.menu-home:hover { color: var(--accent); border-color: var(--accent); }
